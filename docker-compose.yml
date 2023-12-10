@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+      args:
+        - PORT=$PORT
+    env_file:
+      - .env
+    ports:
+      - $PORT:$PORT
+    volumes:
+      - .:/app
