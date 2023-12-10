@@ -28,3 +28,46 @@ Não há nenhum outro requisito fixo além dos especificados na documentação d
 
 ### Terminei o desafio. Como faço a entrega?
 Envie-nos por favor um link com o repositório para que possamos dar uma olhada no código. 😉
+
+
+
+## Tech Stack
+
+Language - [Node.js](https://nodejs.org/) / [Typescript](typescriptlang.org)
+Framework - [Nest](https://github.com/nestjs/nest)
+
+## Installation
+
+```bash
+$ npm ci
+```
+
+## Running the app
+
+```bash
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
+## Test
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```
+
+## Stay in touch
+
+- Author - [Daniel Porto](https://www.linkedin.com/in/danielcesarsantosporto)
