@@ -7,9 +7,24 @@ services:
       target: development
       args:
         - PORT=$PORT
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017/folha-ponto
     env_file:
       - .env
     ports:
       - $PORT:$PORT
     volumes:
       - .:/app
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data: 
