@@ -21,6 +21,8 @@ services:
   mongodb:
     image: mongo
     restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=folha-ponto
     ports:
       - "27017:27017"
     volumes:
