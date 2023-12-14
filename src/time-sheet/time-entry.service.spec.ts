@@ -60,6 +60,7 @@ const day_and_Moments = {
     '2023-11-31 14:00:00',
     '2023-12-03 18:00:00',
   ],
+  invalid_5th_timeEntry: '2023-12-11 20:00:00',
 };
 
 const defaultTimeEntry: CreateTimeEntryDTO = {
@@ -94,6 +95,8 @@ describe('TimeEntryService', () => {
       getModelToken(TimeSheet.name),
     );
     service = module.get<TimeEntryService>(TimeEntryService);
+
+    await timeSheetModel.deleteMany({});
   });
 
   afterEach(async () => {
@@ -170,7 +173,7 @@ describe('TimeEntryService', () => {
     expect(firstCall.id).not.toEqual(secondCall.id);
   });
 
-  it.skip('should throw an error when trying to insert a duplicated Time Entry', async () => {
+  it('should throw an error when trying to insert a duplicated Time Entry', async () => {
     const firstCall = await service.addTimeEntry({
       userId: users[0],
       momento: day_and_Moments.invalid_duplicated[0],
@@ -184,13 +187,13 @@ describe('TimeEntryService', () => {
     });
 
     expect(firstCall.timeEntries).toHaveLength(1);
-    expect(modelFindSpy.calledOnce).toBe(false);
+    expect(modelFindSpy.calledOnce).toBe(true);
     expect(modelCreateSpy.calledOnce).toBe(false);
 
     await expect(secondCall).rejects.toThrowError();
   });
 
-  it.skip('should throw an error when trying to insert more than 4 time entries in the same day', async () => {
+  it('should throw an error when trying to insert more than 4 time entries in the same day', async () => {
     const allDaysCalls = [];
     for (const momento of day_and_Moments.valid_day1) {
       allDaysCalls.push(
@@ -206,7 +209,7 @@ describe('TimeEntryService', () => {
 
     const fifthCall = service.addTimeEntry({
       userId: users[0],
-      momento: day_and_Moments.invalid_duplicated[1],
+      momento: day_and_Moments.invalid_5th_timeEntry,
     });
 
     expect(allDaysCalls).toHaveLength(4);
@@ -215,13 +218,13 @@ describe('TimeEntryService', () => {
     expect(allDaysCalls[2].timeEntries).toHaveLength(3);
     expect(allDaysCalls[3].timeEntries).toHaveLength(4);
 
-    expect(modelFindSpy.calledOnce).toBe(false);
+    expect(modelFindSpy.calledOnce).toBe(true);
     expect(modelCreateSpy.calledOnce).toBe(false);
 
     await expect(fifthCall).rejects.toThrowError();
   });
 
-  it.skip('should throw an error when trying to insert a time entry in a weekend day', async () => {
+  it('should throw an error when trying to insert a time entry in a weekend day', async () => {
     const modelCreateSpy = sandbox.spy(timeSheetModel, 'create');
     const modelFindSpy = sandbox.spy(timeSheetModel, 'findOne');
 
@@ -236,7 +239,7 @@ describe('TimeEntryService', () => {
     await expect(weekendCall).rejects.toThrowError();
   });
 
-  it.skip('should throw an error when time entries violate minimun 1 lunch hour time', async () => {
+  it('should throw an error when time entries violate minimun 1 lunch hour time', async () => {
     const firstCall = await service.addTimeEntry({
       userId: users[0],
       momento: day_and_Moments.invalid_lunch_day[0],
@@ -248,7 +251,7 @@ describe('TimeEntryService', () => {
     const modelCreateSpy = sandbox.spy(timeSheetModel, 'create');
     const modelFindSpy = sandbox.spy(timeSheetModel, 'findOne');
 
-    const thirdCall = await service.addTimeEntry({
+    const thirdCall = service.addTimeEntry({
       userId: users[0],
       momento: day_and_Moments.invalid_lunch_day[2],
     });
@@ -257,13 +260,13 @@ describe('TimeEntryService', () => {
     expect(secondCall.timeEntries).toHaveLength(2);
     expect(firstCall.userId).toEqual(secondCall.userId);
     expect(firstCall.id).toEqual(secondCall.id);
-    expect(modelFindSpy.calledOnce).toBe(false);
+    expect(modelFindSpy.calledOnce).toBe(true);
     expect(modelCreateSpy.calledOnce).toBe(false);
 
     await expect(thirdCall).rejects.toThrowError();
   });
 
-  it.skip('should throw an error when trying to insert a Time Entry with invalid format', async () => {
+  it('should throw an error when trying to insert a Time Entry with invalid format', async () => {
     const modelCreateSpy = sandbox.spy(timeSheetModel, 'create');
     const modelFindSpy = sandbox.spy(timeSheetModel, 'findOne');
 

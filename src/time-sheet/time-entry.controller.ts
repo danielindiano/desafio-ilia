@@ -9,10 +9,10 @@ export class TimeEntryController {
   @HttpCode(201)
   @Post()
   async createTimeEntry(
+    // TODO: The userId param must comes from JWT Auth or other engine. For this example, we're receiving via headers
     @Headers('X-UserId') userId = process.env.API_DEFAULT_USER,
     @Body() timeEntry: CreateTimeEntryDTO,
   ) {
-    // TODO: The userId param must comes from JWT Auth or other engine. For this example, we're receiving via headers
     return await this.timeEntryService.addTimeEntry({ userId, ...timeEntry });
   }
 }
