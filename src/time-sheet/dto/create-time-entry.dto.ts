@@ -1,7 +1,7 @@
 import { IsDateString, IsNotEmpty } from 'class-validator';
 import { TimeEntryErrorMessages } from '../errors/time-entry.error';
 
-export class CreateTimeEntryDTO {
+export class CreateTimeEntryDto {
   @IsDateString(
     { strict: true, strictSeparator: true },
     { message: TimeEntryErrorMessages.InvalidFormat },

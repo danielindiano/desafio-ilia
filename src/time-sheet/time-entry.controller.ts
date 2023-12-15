@@ -1,6 +1,7 @@
 import { Body, Controller, HttpCode, Post, Headers } from '@nestjs/common';
-import { CreateTimeEntryDTO } from './dto/create-time-entry.dto';
+import { CreateTimeEntryDto } from './dto/create-time-entry.dto';
 import { TimeEntryService } from './time-entry.service';
+import { timeSheetToDto } from './dto/time-sheet.dto';
 
 @Controller('batidas')
 export class TimeEntryController {
@@ -11,8 +12,13 @@ export class TimeEntryController {
   async createTimeEntry(
     // TODO: The userId param must comes from JWT Auth or other engine. For this example, we're receiving via headers
     @Headers('X-UserId') userId = process.env.API_DEFAULT_USER,
-    @Body() timeEntry: CreateTimeEntryDTO,
+    @Body() timeEntry: CreateTimeEntryDto,
   ) {
-    return await this.timeEntryService.addTimeEntry({ userId, ...timeEntry });
+    const timeSheet = await this.timeEntryService.addTimeEntry({
+      userId,
+      ...timeEntry,
+    });
+
+    return timeSheetToDto(timeSheet);
   }
 }

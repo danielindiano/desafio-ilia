@@ -11,7 +11,7 @@ import {
   closeInMongodConnection,
   rootMongooseTestModule,
 } from '../../test/utils/MongooseTestModule';
-import { CreateTimeEntryDTO } from './dto/create-time-entry.dto';
+import { CreateTimeEntryDto } from './dto/create-time-entry.dto';
 import { createSandbox } from 'sinon';
 
 // TODO: Get all mocks from helpers
@@ -63,7 +63,7 @@ const day_and_Moments = {
   invalid_5th_timeEntry: '2023-12-11 20:00:00',
 };
 
-const defaultTimeEntry: CreateTimeEntryDTO = {
+const defaultTimeEntry: CreateTimeEntryDto = {
   momento: day_and_Moments.valid_day1[0],
   userId: users[0],
 };

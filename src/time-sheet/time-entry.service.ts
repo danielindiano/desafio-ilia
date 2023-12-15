@@ -8,7 +8,7 @@ import {
   isWeekend,
 } from 'date-fns';
 import { TimeSheet, TimeSheetDocument } from './schemas/time-sheet.schema';
-import { CreateTimeEntryDTO } from './dto/create-time-entry.dto';
+import { CreateTimeEntryDto } from './dto/create-time-entry.dto';
 import {
   TimeEntryErorrDuplicated,
   TimeEntryErorrInvalidFormat,
@@ -27,7 +27,7 @@ export class TimeEntryService {
   ) {}
 
   async addTimeEntry(
-    timeEntryDto: CreateTimeEntryDTO,
+    timeEntryDto: CreateTimeEntryDto,
   ): Promise<TimeSheetDocument> {
     const { userId, momento } = timeEntryDto;
     const date = momento.slice(0, 10);
