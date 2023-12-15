@@ -1,11 +1,11 @@
 import { Body, Controller, HttpCode, Post, Headers } from '@nestjs/common';
 import { CreateTimeEntryDto } from './dto/create-time-entry.dto';
-import { TimeEntryService } from './time-entry.service';
+import { TimeSheetService } from './time-sheet.service';
 import { timeSheetToDto } from './dto/time-sheet.dto';
 
 @Controller('batidas')
 export class TimeEntryController {
-  constructor(private readonly timeEntryService: TimeEntryService) {}
+  constructor(private readonly timeEntryService: TimeSheetService) {}
 
   @HttpCode(201)
   @Post()

@@ -5,7 +5,6 @@ import { TimeSheet, TimeSheetSchema } from './schemas/time-sheet.schema';
 import { TimeEntryController } from './time-entry.controller';
 import { TimeSheetService } from './time-sheet.service';
 import { TimeSheetController } from './time-sheet.controller';
-import { TimeEntryService } from './time-entry.service';
 
 @Module({
   imports: [
@@ -14,7 +13,7 @@ import { TimeEntryService } from './time-entry.service';
     ]),
   ],
   controllers: [TimeSheetController, TimeEntryController],
-  providers: [TimeSheetService, TimeEntryService],
-  exports: [TimeSheetService, TimeEntryService],
+  providers: [TimeSheetService],
+  exports: [TimeSheetService],
 })
 export class TimeSheetModule {}

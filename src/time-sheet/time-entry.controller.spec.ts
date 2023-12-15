@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TimeEntryController } from './time-entry.controller';
-import { TimeEntryService } from './time-entry.service';
+import { TimeSheetService } from './time-sheet.service';
 describe('TimeEntryController', () => {
   let controller: TimeEntryController;
-  let timeEntryService: TimeEntryService;
+  let timeEntryService: TimeSheetService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [TimeEntryController],
       providers: [
         {
-          provide: TimeEntryService,
+          provide: TimeSheetService,
           useValue: {
             addTimeEntry: jest.fn(),
           },
@@ -18,7 +18,7 @@ describe('TimeEntryController', () => {
       ],
     }).compile();
 
-    timeEntryService = module.get<TimeEntryService>(TimeEntryService);
+    timeEntryService = module.get<TimeSheetService>(TimeSheetService);
     controller = module.get<TimeEntryController>(TimeEntryController);
   });
 
