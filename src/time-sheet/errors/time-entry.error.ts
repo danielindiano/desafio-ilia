@@ -27,22 +27,22 @@ export class TimeEntryErrorMissingField extends TimeEntryValidationError {
   }
 }
 
-export class TimeEntryErorrInvalidFormat extends TimeEntryValidationError {
+export class TimeEntryErrorInvalidFormat extends TimeEntryValidationError {
   constructor() {
     super(TimeEntryErrorMessages.InvalidFormat);
   }
 }
-export class TimeEntryErorrMaximum4TimeEntries extends TimeEntryValidationError {
+export class TimeEntryErrorMaximum4TimeEntries extends TimeEntryValidationError {
   constructor() {
     super(TimeEntryErrorMessages.Maximum4Entries);
   }
 }
-export class TimeEntryErorrWeekendEntry extends TimeEntryValidationError {
+export class TimeEntryErrorWeekendEntry extends TimeEntryValidationError {
   constructor() {
     super(TimeEntryErrorMessages.WeekendEntry);
   }
 }
-export class TimeEntryErorrDuplicated extends TimeEntryValidationError {
+export class TimeEntryErrorDuplicated extends TimeEntryValidationError {
   constructor() {
     super(TimeEntryErrorMessages.Duplicated, HttpStatus.CONFLICT);
   }

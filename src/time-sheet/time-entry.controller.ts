@@ -14,10 +14,10 @@ export class TimeEntryController {
     @Headers('X-UserId') userId = process.env.API_DEFAULT_USER,
     @Body() timeEntry: CreateTimeEntryDto,
   ) {
-    const timeSheet = await this.timeEntryService.addTimeEntry({
+    const timeSheet = await this.timeEntryService.addTimeEntry(
       userId,
-      ...timeEntry,
-    });
+      timeEntry,
+    );
 
     return timeSheetToDto(timeSheet);
   }

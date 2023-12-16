@@ -7,8 +7,5 @@ export class CreateTimeEntryDto {
     { message: TimeEntryErrorMessages.InvalidFormat },
   )
   @IsNotEmpty({ message: TimeEntryErrorMessages.MissingField })
-  // @Expose({ name: 'momento' })
   momento: string;
-
-  userId?: string;
 }
